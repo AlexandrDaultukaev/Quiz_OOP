@@ -11,6 +11,8 @@ class QuizBrain:
         ans = self.question_list[self.question_number].answer
         if input(text+"(True/False)").title() == ans:
             print("You got it!")
+            return False
         else:
             print("Nope...")
+            return True
 
