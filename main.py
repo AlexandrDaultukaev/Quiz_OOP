@@ -16,4 +16,3 @@ q_brain = QuizBrain(question_bank)
 end_the_game = False
 while q_brain.question_number < len(question_bank) and not end_the_game:
     end_the_game = q_brain.ask_q(lang)
-    q_brain.next_q()

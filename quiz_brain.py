@@ -6,12 +6,13 @@ class QuizBrain:
 
     def next_q(self):
         self.question_number += 1
+        self.score += 1
 
     def ask_q(self, lang):
         text = self.question_list[self.question_number].text
         ans = self.question_list[self.question_number].answer
         if input(text+"(True/False)").title() == ans:
-            self.score += 1
+            self.next_q()
             if lang in ["ru", "rus", "r", "russia"]:
                 print(f"Правильно!\nСчет: {self.score}")
             else:
