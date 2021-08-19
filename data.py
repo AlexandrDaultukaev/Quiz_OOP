@@ -18,7 +18,14 @@ import requests
 
 data_quest = []
 
-data = requests.get("https://opentdb.com/api.php?amount=10&type=boolean").json()
+params = {
+    "amount": 10,
+    "type": "boolean",
+}
+
+data = requests.get("https://opentdb.com/api.php", params=params)
+data.raise_for_status()
+data = data.json()
 
 for item in data["results"]:
     # print(item)
