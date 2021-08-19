@@ -1,5 +1,4 @@
 import html
-import ui
 
 class QuizBrain:
     def __init__(self, q_list):
@@ -22,7 +21,7 @@ class QuizBrain:
     def ask_q(self):
         text = html.unescape(self.question_list[self.question_number].text)
         self.answer = self.question_list[self.question_number].answer
-        return (text+"(True/False)").title()
+        return text.title()
         # self.next_q()
         # print(f"You got it!\nScore: {self.score}")
         # return False

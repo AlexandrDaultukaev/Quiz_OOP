@@ -1,10 +1,10 @@
 from tkinter import *
-import quiz_brain
+from quiz_brain import QuizBrain
 
 
 class QuizUI:
 
-    def __init__(self, qb):
+    def __init__(self, qb: QuizBrain):
         self.qb = qb
         self.window = Tk()
         self.window.title("Quiz APP")
@@ -24,9 +24,9 @@ class QuizUI:
         self.canvas = Canvas(width=350, height=350, bg="white", highlightthickness=0)
         self.canvas.place(x=75, y=45)
         self.score = self.bg_canvas.create_text(125, 20, text="score: 0", font=("Arial", 20, "normal"), fill="white")
-        self.text_question = self.canvas.create_text(150, 150, text=self.qb.ask_q(), font=("Arial", 10,
-                                                                                           "normal"),
-                                                     fill="black")
+        self.text_question = self.canvas.create_text(150, 150, text=self.qb.ask_q(), font=("Arial", 20,
+                                                                                           "italic"),
+                                                     fill="black", width=250)
 
         self.window.mainloop()
 
