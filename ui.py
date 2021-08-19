@@ -37,20 +37,24 @@ class QuizUI:
             self.button_true["state"] = "disabled"
             self.button_false["state"] = "disabled"
 
+    def next_question(self):
+        self.canvas.config(bg="white")
+        self.canvas.itemconfig(self.text_question, text=self.qb.ask_q())
+
+    def draw_answer(self, is_right):
+        if not is_right:
+            self.canvas.config(bg="red")
+        else:
+            self.canvas.config(bg="green")
+        self.new_score()
+        self.window.after(1000, self.next_question)
+
     def true_click(self):
         if self.qb.score < 10:
-            new_q = self.qb.check_q("True")
-            if new_q == "You lose":
-                self.button_true["state"] = "disabled"
-                self.button_false["state"] = "disabled"
-            self.new_score()
-            self.canvas.itemconfig(self.text_question, text=new_q)
+            is_right = self.qb.check_q("True")
+            self.draw_answer(is_right)
 
     def false_click(self):
         if self.qb.score < 10:
-            new_q = self.qb.check_q("False")
-            if new_q == "You lose":
-                self.button_true["state"] = "disabled"
-                self.button_false["state"] = "disabled"
-            self.new_score()
-            self.canvas.itemconfig(self.text_question, text=new_q)
+            is_right = self.qb.check_q("False")
+            self.draw_answer(is_right)
