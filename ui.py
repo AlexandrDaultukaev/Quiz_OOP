@@ -1,8 +1,11 @@
 from tkinter import *
+import quiz_brain
+
 
 class QuizUI:
 
-    def __init__(self):
+    def __init__(self, qb):
+        self.qb = qb
         self.window = Tk()
         self.window.title("Quiz APP")
         self.window.maxsize(500, 600)
@@ -21,12 +24,33 @@ class QuizUI:
         self.canvas = Canvas(width=350, height=350, bg="white", highlightthickness=0)
         self.canvas.place(x=75, y=45)
         self.score = self.bg_canvas.create_text(125, 20, text="score: 0", font=("Arial", 20, "normal"), fill="white")
+        self.text_question = self.canvas.create_text(150, 150, text=self.qb.ask_q(), font=("Arial", 10,
+                                                                                           "normal"),
+                                                     fill="black")
+
         self.window.mainloop()
 
+    def new_score(self):
+        self.bg_canvas.itemconfig(self.score, text=f"score: {self.qb.score}")
+        if self.qb.score == 10:
+            self.canvas.itemconfig(self.text_question, text="You win!")
+            self.button_true["state"] = "disabled"
+            self.button_false["state"] = "disabled"
+
     def true_click(self):
-        print("T")
+        if self.qb.score < 10:
+            new_q = self.qb.check_q("True")
+            if new_q == "You lose":
+                self.button_true["state"] = "disabled"
+                self.button_false["state"] = "disabled"
+            self.new_score()
+            self.canvas.itemconfig(self.text_question, text=new_q)
 
     def false_click(self):
-        print("F")
-
-q = QuizUI()
+        if self.qb.score < 10:
+            new_q = self.qb.check_q("False")
+            if new_q == "You lose":
+                self.button_true["state"] = "disabled"
+                self.button_false["state"] = "disabled"
+            self.new_score()
+            self.canvas.itemconfig(self.text_question, text=new_q)

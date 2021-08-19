@@ -19,7 +19,7 @@ import requests
 data_quest = []
 
 params = {
-    "amount": 10,
+    "amount": 12,
     "type": "boolean",
 }
 
