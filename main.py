@@ -4,7 +4,7 @@ from quiz_brain import QuizBrain
 from ui import QuizUI
 
 question_bank = []
-
+print(data_quest)
 for question in data_quest:
     question_bank.append(Question(question["question"], question["answer"]))
 

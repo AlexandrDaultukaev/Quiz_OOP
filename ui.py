@@ -27,7 +27,6 @@ class QuizUI:
         self.text_question = self.canvas.create_text(150, 150, text=self.qb.ask_q(), font=("Arial", 20,
                                                                                            "italic"),
                                                      fill="black", width=250)
-
         self.window.mainloop()
 
     def new_score(self):
@@ -38,8 +37,14 @@ class QuizUI:
             self.button_false["state"] = "disabled"
 
     def next_question(self):
-        self.canvas.config(bg="white")
-        self.canvas.itemconfig(self.text_question, text=self.qb.ask_q())
+        if self.qb.question_number < 10:
+            self.canvas.config(bg="white")
+            self.canvas.itemconfig(self.text_question, text=self.qb.ask_q())
+        else:
+            self.canvas.itemconfig(self.text_question, text=f"Total score: {self.qb.score}")
+            self.canvas.config(bg="yellow")
+            self.button_true["state"] = "disabled"
+            self.button_false["state"] = "disabled"
 
     def draw_answer(self, is_right):
         if not is_right:
@@ -50,11 +55,9 @@ class QuizUI:
         self.window.after(1000, self.next_question)
 
     def true_click(self):
-        if self.qb.score < 10:
-            is_right = self.qb.check_q("True")
-            self.draw_answer(is_right)
+        is_right = self.qb.check_q("True")
+        self.draw_answer(is_right)
 
     def false_click(self):
-        if self.qb.score < 10:
-            is_right = self.qb.check_q("False")
-            self.draw_answer(is_right)
+        is_right = self.qb.check_q("False")
+        self.draw_answer(is_right)
