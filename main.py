@@ -1,18 +1,13 @@
-from data import question_data
-from data_ru import question_data as question_data_ru
+from data import data_quest
 from question_model import Question
 from quiz_brain import QuizBrain
 
 question_bank = []
-lang = input("Choose language(Выберите язык)(ru/eng): ").lower()
-if  lang in ["ru", "rus", "r", "russia"]:
-    for question in question_data_ru:
-        question_bank.append(Question(question["text"], question["answer"]))
-else:
-    for question in question_data:
-        question_bank.append(Question(question["text"], question["answer"]))
+
+for question in data_quest:
+    question_bank.append(Question(question["question"], question["answer"]))
 
 q_brain = QuizBrain(question_bank)
 end_the_game = False
 while q_brain.question_number < len(question_bank) and not end_the_game:
-    end_the_game = q_brain.ask_q(lang)
+    end_the_game = q_brain.ask_q()

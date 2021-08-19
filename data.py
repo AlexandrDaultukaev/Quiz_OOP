@@ -26,4 +26,4 @@ for item in data["results"]:
     # print(data_dict)
     data_quest.append(data_dict)
 
-print(data_quest)
+#print(data_quest)

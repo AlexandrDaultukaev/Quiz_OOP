@@ -8,20 +8,14 @@ class QuizBrain:
         self.question_number += 1
         self.score += 1
 
-    def ask_q(self, lang):
+    def ask_q(self):
         text = self.question_list[self.question_number].text
         ans = self.question_list[self.question_number].answer
         if input(text+"(True/False)").title() == ans:
             self.next_q()
-            if lang in ["ru", "rus", "r", "russia"]:
-                print(f"Правильно!\nСчет: {self.score}")
-            else:
-                print(f"You got it!\nScore: {self.score}")
+            print(f"You got it!\nScore: {self.score}")
             return False
         else:
-            if lang in ["ru", "rus", "r", "russia"]:
-                print(f"Неа...\nСчет: {self.score}")
-            else:
-                print(f"Nope...\nScore: {self.score}")
+            print(f"Nope...\nScore: {self.score}")
             return True
 
